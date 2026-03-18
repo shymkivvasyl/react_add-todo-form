@@ -6,7 +6,16 @@ import todosFromServer from './api/todos';
 import { TodoList } from './components/TodoList';
 
 export const App = () => {
-  const [todos, setTodos] = useState(todosFromServer);
+  const preparedTodos = todosFromServer.map(todo => {
+    const user = usersFromServer.find(u => u.id === todo.userId);
+
+    return {
+      ...todo,
+      user: user ?? undefined,
+    };
+  });
+
+  const [todos, setTodos] = useState(preparedTodos);
 
   const [title, setTitle] = useState('');
   const [userId, setUserId] = useState('');
@@ -36,7 +45,7 @@ export const App = () => {
             title: title.trim(),
             completed: false,
             userId: Number(userId),
-            user: user,
+            user: user ?? undefined,
           };
 
           setTodos(prev => [...prev, newTodo]);

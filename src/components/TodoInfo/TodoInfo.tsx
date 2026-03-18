@@ -1,17 +1,5 @@
 import { UserInfo } from '../UserInfo';
-
-type Todo = {
-  id: number;
-  title: string;
-  completed: boolean;
-  userId: number;
-  user?: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-  };
-};
+import { Todo } from '../../types/todo';
 
 export const TodoInfo = ({ todo }: { todo: Todo }) => {
   return (
@@ -20,7 +8,7 @@ export const TodoInfo = ({ todo }: { todo: Todo }) => {
       className={`TodoInfo ${todo.completed ? 'TodoInfo--completed' : ''}`}
     >
       <h2 className="TodoInfo__title">{todo.title}</h2>
-      <UserInfo user={todo.user} />
+      {todo.user && <UserInfo user={todo.user} />}
     </article>
   );
 };
