@@ -1,17 +1,16 @@
 import { UserInfo } from '../UserInfo';
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
 
 type Todo = {
   id: number;
   title: string;
   completed: boolean;
   userId: number;
-  user?: User;
+  user?: {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+  };
 };
 
 export const TodoInfo = ({ todo }: { todo: Todo }) => {

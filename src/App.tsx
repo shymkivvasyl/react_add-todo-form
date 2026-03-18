@@ -29,11 +29,14 @@ export const App = () => {
             return;
           }
 
+          const user = usersFromServer.find(u => u.id === Number(userId));
+
           const newTodo = {
             id: Math.max(0, ...todos.map(t => t.id)) + 1,
             title: title.trim(),
             completed: false,
             userId: Number(userId),
+            user: user,
           };
 
           setTodos(prev => [...prev, newTodo]);

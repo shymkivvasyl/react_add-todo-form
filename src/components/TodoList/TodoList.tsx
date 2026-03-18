@@ -1,4 +1,3 @@
-import usersFromServer from '../../api/users';
 import { TodoInfo } from '../TodoInfo';
 
 type Todo = {
@@ -6,6 +5,12 @@ type Todo = {
   title: string;
   completed: boolean;
   userId: number;
+  user?: {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+  };
 };
 
 type Props = {
@@ -16,9 +21,7 @@ export const TodoList = ({ todos }: Props) => {
   return (
     <section className="TodoList">
       {todos.map(todo => {
-        const user = usersFromServer.find(u => u.id === todo.userId);
-
-        return <TodoInfo key={todo.id} todo={{ ...todo, user }} />;
+        return <TodoInfo key={todo.id} todo={todo} />;
       })}
     </section>
   );
